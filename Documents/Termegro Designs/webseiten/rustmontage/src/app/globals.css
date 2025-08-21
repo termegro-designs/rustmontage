@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #1a1a1a;
+  --secondary-color: #8B4513;
+  --accent-color: #D2691E;
+  --text-color: #1a1a1a;
+  --text-secondary: #666666;
+  --background-light: #F8F8F8;
+}
+
+body {
+  @apply antialiased;
+}
+/* intentionally empty placeholder for page-scoped cursor styles */
+
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-merriweather;
+}
+
+p, a, span, div {
+  @apply font-inter;
+}
+
+.btn-primary {
+  @apply bg-primary text-white px-8 py-4 rounded-none font-medium transition-all hover:bg-primary/90 uppercase tracking-wider;
+}
+
+.btn-secondary {
+  @apply border-2 border-white/80 text-white px-8 py-4 rounded-none font-medium transition-all hover:bg-white hover:text-primary uppercase tracking-wider backdrop-blur-sm;
+}
+
+.btn-small {
+  @apply bg-primary text-white px-4 py-2 rounded-none font-medium transition-all hover:bg-primary/90 uppercase tracking-wide;
+}
+
+.section-padding {
+  @apply py-24 lg:py-32;
+}
+
+.container-custom {
+  @apply container mx-auto px-4 lg:px-8;
+}
+
+.bg-dots {
+  background-image: radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.divider {
+  @apply h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent;
+}
+
+.nav-link {
+  @apply text-gray-700 hover:text-primary transition-colors uppercase tracking-wide text-sm;
+}
+
+.mobile-link {
+  @apply text-gray-700 hover:text-primary transition-colors uppercase tracking-wide text-base;
+}
+
+.card {
+  @apply bg-white p-8 shadow-sm border border-black/5;
+}
+
+.eyebrow {
+  @apply text-xs tracking-[0.2em] uppercase text-text-secondary;
+}
+
+.hero-overlay {
+  background-image: radial-gradient(1200px 600px at 50% 0%, rgba(255,255,255,0.15), rgba(255,255,255,0));
+}

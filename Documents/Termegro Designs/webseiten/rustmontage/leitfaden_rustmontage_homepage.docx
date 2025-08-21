@@ -1,0 +1,200 @@
+1. Projektüberblick
+Kunde: Rustmontage – Tischlerei und Küchen-/Möbelmontage in Wien
+
+Ziel: Eine moderne, vertrauenswürdige One-Page- oder Multi-Page-Website mit klarer Struktur, responsiv, aufgeräumt und im Holz-Look.
+
+Technologie: React (PWA-ready), TailwindCSS, Next.js oder Vite, Bilder-Assets in /public/images, Komponenten in /src/components.
+
+2. Ordner- & Dateistruktur
+bash
+Kopieren
+Bearbeiten
+/public
+  /images
+    hero-bg.jpg
+    hammer-icon.svg
+    projekt1.jpg
+    projekt2.jpg
+/src
+  /components
+    Header.jsx
+    Hero.jsx
+    Leistungen.jsx
+    ÜberMich.jsx
+    Projekte.jsx
+    Kontakt.jsx
+    Footer.jsx
+  /pages
+    index.jsx
+  /styles
+    globals.css
+    tailwind.config.js
+3. Sitemap & Routen
+/ – Startseite (One-Pager)
+
+/leistungen – Detailseite „Leistungen“ (optional)
+
+/über-mich – Über den Inhaber
+
+/kontakt – Kontaktformular & Infos
+
+4. Komponenten-Skript
+4.1 Header.jsx
+Inhalt:
+
+Logo/Hammer-Icon (SVG) links
+
+Navigation (Startseite, Leistungen, Über mich, Kontakt)
+
+Optional Such-Icon oder Button
+
+Aufgabe:
+
+Importiere Hammer-SVG.
+
+Erstelle responsive <nav> mit Tailwind-Klassen (flex, space-x-8, py-4).
+
+Bei Mobile: Hamburger-Icon und Slide-In-Menu.
+
+4.2 Hero.jsx
+Inhalt:
+
+Vollbild-Hintergrund hero-bg.jpg (dunkles Holz)
+
+Überschrift:
+
+html
+Kopieren
+Bearbeiten
+<h1>Rustmontage</h1>
+<p>Küchen- & Möbelmontage in Wien</p>
+<button>Leistungen ansehen</button>
+Aufgabe:
+
+Hintergrundbild via background-image.
+
+Text zentriert, groß (text-5xl), Weiß mit leichter Schatten (Tailwind text-white drop-shadow).
+
+Button-Komponente mit Hover-Effekt (bg-braun-dark hover:bg-braun-darker text-white py-3 px-8 rounded-lg).
+
+4.3 Leistungen.jsx
+Inhalt: Drei Leistungs-Cards:
+
+Küchenmontage (Icon, kurze Beschreibung)
+
+Möbelmontage
+
+Maßanfertigung & Reparatur
+
+Aufgabe:
+
+Grid-Layout (grid grid-cols-1 sm:grid-cols-3 gap-6).
+
+Karte: Icon + Titel + Text + CTA-Link „Mehr erfahren“.
+
+Nutze Tailwind-Karten mit Schatten und Hover-Lift.
+
+4.4 ÜberMich.jsx
+Inhalt:
+
+Foto des Inhabers (rund, links)
+
+Textblock rechts mit
+
+Name, Berufsbezeichnung
+
+Kurzprofil (25 Jahre Erfahrung, Zuverlässigkeit, Präzision)
+
+Aufgabe:
+
+Flex-Layout (flex flex-col md:flex-row items-center).
+
+Bild in /public/images/inhaber.jpg.
+
+Text typografisch hierarchisch (text-2xl font-bold, text-base).
+
+4.5 Projekte.jsx
+Inhalt:
+
+Portfolio-Slider mit 4 Beispiel-Projekten
+
+Klick öffnet Lightbox
+
+Aufgabe:
+
+Bibliothek wie swiper.js oder reines CSS-Grid.
+
+Bilder in /public/images/projekt1.jpg, …
+
+Overlay-Effekt bei Hover.
+
+4.6 Kontakt.jsx
+Inhalt:
+
+Kontaktformular (Name, E-Mail, Nachricht)
+
+Kontaktinfos (E-Mail, Telefon, Standort „Wien & Umgebung“)
+
+Aufgabe:
+
+Formular mit React Hook Form validieren.
+
+Backend-Endpoint /api/contact (Next.js API-Route) oder Mail-Service-Integration.
+
+Tailwind-Inputs, Submit-Button im Holz-Look.
+
+4.7 Footer.jsx
+Inhalt:
+
+Copyright („© 2025 Rustmontage“)
+
+Social-Icons (falls vorhanden)
+
+Aufgabe:
+
+Einfacher Block, dunkles Holz-Hintergrund, weiße Schrift.
+
+Flex-Layout für Icon-Liste.
+
+5. Globale Styles & Theme
+Farben (Tailwind-Config):
+
+js
+Kopieren
+Bearbeiten
+theme: {
+  extend: {
+    colors: {
+      braun: {
+        light: '#8B5E3C',
+        DEFAULT: '#5A3F27',
+        dark: '#3E2F1C'
+      }
+    }
+  }
+}
+Fonts:
+
+Überschriften: Merriweather, serif
+
+Body: Inter, sans-serif
+
+6. SEO & Meta
+Meta-Tags (in <Head>):
+
+html
+Kopieren
+Bearbeiten
+<title>Rustmontage – Tischler in Wien | Küchen- & Möbelmontage</title>
+<meta name="description" content="Rustmontage: Zuverlässige Küchen- & Möbelmontage in Wien. 25 Jahre Erfahrung, präzise Arbeiten, persönlicher Service." />
+<meta property="og:image" content="/images/hero-bg.jpg" />
+Performance: Bilder optimieren (WebP), next/image oder vite-imagetools.
+
+7. Deployment & Tests
+Build: npm run build && npm run start
+
+Responsiveness: Test auf Mobile, Tablet, Desktop
+
+Accessibility: Lighthouse-Check (Kontrast, Alt-Tags)
+
+SEO-Audit: Meta, Title-Längen
