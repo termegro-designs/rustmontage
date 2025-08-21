@@ -159,10 +159,11 @@ export default function LuxuryCursor({ rootSelector }: Props) {
       nodes.forEach((el) => {
         let rect: DOMRect | null = null
         const strength = 18
-        const mm = (ev: MouseEvent) => {
+        const mm = (ev: Event) => {
+          const mouseEvent = ev as MouseEvent
           rect = rect || (el as HTMLElement).getBoundingClientRect()
-          const mx = ev.clientX - (rect.left + rect.width / 2)
-          const my = ev.clientY - (rect.top + rect.height / 2)
+          const mx = mouseEvent.clientX - (rect.left + rect.width / 2)
+          const my = mouseEvent.clientY - (rect.top + rect.height / 2)
           const tx = (mx / rect.width) * strength
           const ty = (my / rect.height) * strength
           ;(el as HTMLElement).style.transform = `translate(${tx}px, ${ty}px)`
