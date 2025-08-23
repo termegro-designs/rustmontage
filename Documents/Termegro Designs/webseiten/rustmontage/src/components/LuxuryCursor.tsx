@@ -121,6 +121,32 @@ export default function LuxuryCursor({ rootSelector }: Props) {
       return el
     }
 
+    const highlightTextUnderTape = () => {
+      const tapeRect = {
+        left: ringX - tapeLenRendered / 2,
+        right: ringX + tapeLenRendered / 2,
+        top: ringY - 9,
+        bottom: ringY + 9
+      }
+
+      const textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div, a')
+      textElements.forEach((el) => {
+        const rect = (el as HTMLElement).getBoundingClientRect()
+        const isOverlapping = !(
+          tapeRect.right < rect.left ||
+          tapeRect.left > rect.right ||
+          tapeRect.bottom < rect.top ||
+          tapeRect.top > rect.bottom
+        )
+
+        if (isOverlapping) {
+          ;(el as HTMLElement).classList.add('lux-text-highlight')
+        } else {
+          ;(el as HTMLElement).classList.remove('lux-text-highlight')
+        }
+      })
+    }
+
     const animate = () => {
       ringX += (pointerX - ringX) * 0.15
       ringY += (pointerY - ringY) * 0.15
@@ -130,6 +156,8 @@ export default function LuxuryCursor({ rootSelector }: Props) {
       tape.style.transform = `translate(${ringX}px, ${ringY}px) rotate(${tapeAngleDeg}deg)`
       const totalMm = totalDistancePx * PX_TO_MM
       tapeLabel.textContent = `${Math.round(totalMm)} mm`
+
+      highlightTextUnderTape()
 
       if (totalMm >= nextMilestoneMm && !bannerEl) {
         let pick = Math.floor(Math.random() * bannerMessages.length)
@@ -255,8 +283,9 @@ export default function LuxuryCursor({ rootSelector }: Props) {
             repeating-linear-gradient(90deg, rgba(0,0,0,0.85) 0 3px, transparent 3px 50px);
           box-shadow: 0 4px 18px rgba(0,0,0,0.25), inset 0 -1px 0 rgba(0,0,0,0.2);
           border: 1px solid rgba(0,0,0,0.18);
-          z-index: 58;
-          opacity: 0.95;
+          z-index: 1;
+          opacity: 0.7;
+          pointer-events: none;
         }
         .lux-tape-label {
           position: absolute;
@@ -369,6 +398,15 @@ export default function LuxuryCursor({ rootSelector }: Props) {
         @keyframes lux-banner-in {
           0% { opacity: 0; transform: translate(-50%, -50%) translateY(6px); }
           100% { opacity: 1; transform: translate(-50%, -50%) translateY(0px); }
+        }
+        .lux-text-highlight {
+          background: linear-gradient(135deg, rgba(242, 211, 74, 0.3) 0%, rgba(242, 211, 74, 0.15) 100%);
+          text-shadow: 0 0 8px rgba(242, 211, 74, 0.4);
+          transform: scale(1.02);
+          transition: all 200ms ease;
+          border-radius: 4px;
+          padding: 2px 4px;
+          margin: -2px -4px;
         }
       `}</style>
     </div>
