@@ -9,7 +9,7 @@ type ChatMessage = {
 }
 
 type Props = { 
-  onNewMessage: (message: string) => void
+  onNewMessage: (addMessageFn: (message: string) => void) => void
 }
 
 export default function RustmontageChat({ onNewMessage }: Props) {
