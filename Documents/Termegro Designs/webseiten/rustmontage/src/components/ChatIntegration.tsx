@@ -6,7 +6,7 @@ import RustmontageChat from './RustmontageChat'
 export default function ChatIntegration() {
   const [addChatMessage, setAddChatMessage] = useState<((message: string) => void) | null>(null)
 
-  const handleChatReady = useCallback((addMessageFn: (message: string) => void) => {
+  const handleChatReady = useCallback((addMessageFn: any) => {
     setAddChatMessage(() => addMessageFn)
   }, [])
 

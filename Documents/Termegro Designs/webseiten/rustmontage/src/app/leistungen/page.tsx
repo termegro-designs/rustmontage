@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import SEOHeader from '@/components/SEOHeader'
 
 
 export const metadata = {
@@ -10,6 +11,15 @@ export const metadata = {
 export default function LeistungenPage() {
     return (
     <div>
+      <SEOHeader 
+        primaryKeyword="Handwerker Dienstleistungen Wien"
+        keywords={[
+          "Tischlerarbeiten", "Küchenmontage Kosten", "Möbelmontage Preise", "Einbauschränke", 
+          "Reparatur Service", "Handwerker buchen", "schnelle Reparatur", "günstige Handwerker",
+          "zuverlässige Montage", "Wartung", "Instandhaltung", "Renovierung", "Umbau"
+        ]}
+        location="Wien und Umgebung"
+      />
       <Header />
       <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-primary via-secondary to-accent overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>

@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import SEOHeader from '@/components/SEOHeader'
 import Link from 'next/link'
 
 export const metadata = {

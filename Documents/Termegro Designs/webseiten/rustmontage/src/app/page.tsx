@@ -1,9 +1,19 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import SEOHeader from '@/components/SEOHeader'
 
 export default function HomePage() {
   return (
     <div>
+      <SEOHeader 
+        primaryKeyword="Küchenmontage Wien"
+        keywords={[
+          "Möbelmontage", "IKEA Montage", "Küche montieren lassen", "Handwerker Wien", 
+          "Tischler Wien", "Küchenaufbau", "Möbelaufbau", "Einbauküche montieren",
+          "günstige Montage", "schnelle Montage", "professionelle Montage", "Montageservice"
+        ]}
+        location="Wien"
+      />
       <Header />
       {/* Hero */}
       <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-primary to-secondary">
