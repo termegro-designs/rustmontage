@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import LuxuryCursor from '@/components/LuxuryCursor'
+
 
 export const metadata = {
   title: 'Leistungen – Rustmontage | Küchen- & Möbelmontage',
@@ -8,9 +8,8 @@ export const metadata = {
 }
 
 export default function LeistungenPage() {
-  return (
-    <div className="cursor-none">
-      <LuxuryCursor rootSelector="main" />
+    return (
+    <div>
       <Header />
       <section className="relative min-h-[60vh] flex items-center bg-gradient-to-br from-primary via-secondary to-accent overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
@@ -31,23 +30,23 @@ export default function LeistungenPage() {
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white/10 to-transparent"></div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-wood-grain">
         <div className="container-custom max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-8 rounded-2xl border border-black/5 bg-gradient-to-br from-gray-50 to-white shadow-sm">
+            <div className="p-8 rounded-2xl border border-black/10 bg-wood-text shadow-sm">
               <div className="text-2xl mb-2">📐</div>
               <div className="font-bold text-primary mb-2">Saubere Planung</div>
-              <p className="text-text-secondary">Transparente Abstimmung und klare Schritte – wir führen Sie sicher durch den gesamten Ablauf.</p>
+              <p className="text-readable-secondary">Transparente Abstimmung und klare Schritte – wir führen Sie sicher durch den gesamten Ablauf.</p>
             </div>
-            <div className="p-8 rounded-2xl border border-black/5 bg-gradient-to-br from-gray-50 to-white shadow-sm">
+            <div className="p-8 rounded-2xl border border-black/10 bg-wood-text shadow-sm">
               <div className="text-2xl mb-2">🧰</div>
               <div className="font-bold text-primary mb-2">Präzise Umsetzung</div>
-              <p className="text-text-secondary">Sorgfältige Montage, saubere Kanten und ein aufgeräumter Arbeitsplatz – das versteht sich für uns von selbst.</p>
+              <p className="text-readable-secondary">Sorgfältige Montage, saubere Kanten und ein aufgeräumter Arbeitsplatz – das versteht sich für uns von selbst.</p>
             </div>
-            <div className="p-8 rounded-2xl border border-black/5 bg-gradient-to-br from-gray-50 to-white shadow-sm">
+            <div className="p-8 rounded-2xl border border-black/10 bg-wood-text shadow-sm">
               <div className="text-2xl mb-2">✅</div>
               <div className="font-bold text-primary mb-2">Wertige Übergabe</div>
-              <p className="text-text-secondary">Gemeinsame Abnahme und Feinschliff – damit wirklich alles passt und Sie lange Freude daran haben.</p>
+              <p className="text-readable-secondary">Gemeinsame Abnahme und Feinschliff – damit wirklich alles passt und Sie lange Freude daran haben.</p>
             </div>
           </div>
         </div>
@@ -64,7 +63,7 @@ export default function LeistungenPage() {
           <div className="grid md:grid-cols-2 gap-8 max-w-7xl mx-auto">
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
-              <div className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full magnetic" data-cursor="hover">
+              <div className="relative bg-wood-section p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full magnetic" data-cursor="hover">
                 <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
                   🍳
                 </div>
@@ -98,7 +97,7 @@ export default function LeistungenPage() {
             
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-accent/5 rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
-              <div className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full magnetic" data-cursor="hover">
+              <div className="relative bg-wood-section p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full magnetic" data-cursor="hover">
                 <div className="w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
                   🪑
                 </div>
@@ -131,7 +130,7 @@ export default function LeistungenPage() {
             
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
-              <div className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full magnetic" data-cursor="hover">
+              <div className="relative bg-wood-section p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full magnetic" data-cursor="hover">
                 <div className="w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
                   🏠
                 </div>
@@ -165,7 +164,7 @@ export default function LeistungenPage() {
             
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl transform group-hover:scale-105 transition-transform duration-300"></div>
-              <div className="relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full magnetic" data-cursor="hover">
+              <div className="relative bg-wood-section p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 h-full magnetic" data-cursor="hover">
                 <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
                   🔨
                 </div>
@@ -241,9 +240,9 @@ export default function LeistungenPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-wood-grain">
         <div className="container-custom text-center max-w-4xl">
-          <div className="bg-gradient-to-br from-gray-50 to-white p-12 rounded-3xl shadow-xl border border-gray-100">
+          <div className="bg-wood-text p-12 rounded-3xl shadow-xl border border-black/10">
             <h2 className="text-4xl font-bold text-primary mb-6">Bereit für Ihr Projekt?</h2>
             <p className="text-lg text-text-secondary mb-8 leading-relaxed">
               Schicken Sie uns Maße und Fotos – wir beraten schnell, kompetent und transparent. 
@@ -258,7 +257,7 @@ export default function LeistungenPage() {
               </a>
             </div>
           </div>
-        </div>
+                </div>
       </section>
       <Footer />
     </div>

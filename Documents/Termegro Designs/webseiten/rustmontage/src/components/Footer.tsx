@@ -24,9 +24,9 @@ export default function Footer() {
           <div>
             <div className="text-sm tracking-widest text-white/70 mb-4">KONTAKT</div>
             <ul className="space-y-2 text-white/90">
-              <li>+43 664 123 456 789</li>
+              <li>+43 66 565 788 972</li>
               <li>office@rustmontage.at</li>
-              <li>Wien & Niederösterreich</li>
+              <li>Pfalzgasse 5, 1220 Wien</li>
             </ul>
           </div>
         </div>
@@ -37,6 +37,7 @@ export default function Footer() {
           <div className="flex items-center gap-6">
             <Link href="/impressum" className="hover:text-white">Impressum</Link>
             <Link href="/datenschutz" className="hover:text-white">Datenschutz</Link>
+            <Link href="/agb" className="hover:text-white">AGB</Link>
           </div>
         </div>
       </div>

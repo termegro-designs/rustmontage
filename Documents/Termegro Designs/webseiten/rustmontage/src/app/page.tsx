@@ -26,7 +26,7 @@ export default function HomePage() {
       </section>
 
       {/* Leistungen Preview */}
-      <section id="leistungen" className="section-padding bg-background-light">
+      <section id="leistungen" className="section-padding bg-wood-section">
         <div className="container-custom">
           <div className="text-center mb-20">
             <div className="eyebrow">Leistungsübersicht</div>
@@ -58,7 +58,7 @@ export default function HomePage() {
       </section>
 
       {/* USP / Vertrauen */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-wood-grain">
         <div className="container-custom grid md:grid-cols-3 gap-8 items-start">
           <div className="card">
             <div className="eyebrow mb-2">Erfahrung</div>
@@ -79,7 +79,7 @@ export default function HomePage() {
       </section>
 
       {/* Kontakt CTA */}
-      <section id="kontakt" className="section-padding bg-white">
+      <section id="kontakt" className="section-padding bg-wood-grain">
         <div className="container-custom text-center">
           <div className="eyebrow">Kontakt</div>
           <h2 className="text-4xl md:text-5xl font-bold text-primary mt-2 mb-6">Lassen Sie uns Ihr Projekt besprechen</h2>

@@ -6,8 +6,8 @@
   --primary-color: #1a1a1a;
   --secondary-color: #8B4513;
   --accent-color: #D2691E;
-  --text-color: #1a1a1a;
-  --text-secondary: #666666;
+  --text-color: #111827; /* Very dark for maximum readability */
+  --text-secondary: #374151; /* Darker gray for better readability on wood backgrounds */
   --background-light: #F8F8F8;
 }
 
@@ -50,6 +50,65 @@ p, a, span, div {
   background-size: 20px 20px;
 }
 
+.bg-wood {
+  background-color: #D2B48C; /* Light wood tone as fallback */
+  background-image: url('/images/wood_texture_4k_background.webp'); /* 4K WebP wood texture pattern */
+  background-size: 400px 400px; /* Tile the pattern to show wood details */
+  background-repeat: repeat;
+  background-attachment: scroll;
+}
+
+.bg-wood-grain {
+  background-color: #D2B48C; /* Light wood tone as fallback */
+  background-image: url('/images/wood_texture_4k_background.webp'); /* 4K WebP wood texture pattern */
+  background-size: 400px 400px; /* Tile the pattern for detailed wood grain */
+  background-repeat: repeat;
+  background-attachment: scroll;
+}
+
+.bg-wood-section {
+  background-color: #D2B48C; /* Light wood tone as fallback for content sections */
+  background-image: url('/images/wood_texture_4k_background.webp'); /* 4K WebP wood texture pattern */
+  background-size: 500px 500px; /* Slightly larger tiles for section backgrounds */
+  background-repeat: repeat;
+}
+
+.bg-wood-text {
+  background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white for text readability */
+  background-image: url('/images/wood_texture_4k_background.webp'); /* 4K WebP wood texture pattern */
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  background-blend-mode: overlay; /* Blend texture with white overlay */
+  backdrop-filter: blur(1px); /* Subtle blur for better text readability */
+  color: #2D2D2D; /* Dark text for maximum contrast and readability */
+}
+
+/* Text color classes for better readability */
+.text-readable {
+  color: #1a1a1a !important; /* Very dark for maximum readability */
+}
+
+.text-readable-secondary {
+  color: #4a4a4a !important; /* Dark gray for secondary text */
+}
+
+.text-readable-muted {
+  color: #666666 !important; /* Medium gray for muted text */
+}
+
+/* Responsive heading classes */
+.heading-responsive {
+  @apply text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-readable leading-tight;
+}
+
+.heading-large-responsive {
+  @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-readable leading-tight;
+}
+
+.text-body-responsive {
+  @apply text-sm sm:text-base lg:text-lg text-readable-secondary leading-relaxed;
+}
+
 .divider {
   @apply h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent;
 }
@@ -63,7 +122,7 @@ p, a, span, div {
 }
 
 .card {
-  @apply bg-white p-8 shadow-sm border border-black/5;
+  @apply bg-wood-text p-8 shadow-sm border border-black/10 text-readable;
 }
 
 .eyebrow {

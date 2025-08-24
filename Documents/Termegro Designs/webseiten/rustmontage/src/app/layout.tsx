@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Roboto, Merriweather } from 'next/font/google'
 import './globals.css'
+import LuxuryCursor from '@/components/LuxuryCursor'
+import ChatIntegration from '@/components/ChatIntegration'
+import CookieBanner from '@/components/CookieBanner'
 
 const inter = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -71,17 +74,19 @@ export default function RootLayout({
               "name": "Rustmontage",
               "description": "Meistertischler für exklusive Küchen- & Möbelmontage in Wien und Niederösterreich",
               "image": "https://rustmontage.at/images/hero-bg.jpg",
-              "telephone": "+43664123456789",
+              "telephone": "+4366565788972",
               "email": "office@rustmontage.at",
               "address": {
                 "@type": "PostalAddress",
+                "streetAddress": "Pfalzgasse 5",
+                "postalCode": "1220",
                 "addressLocality": "Wien",
                 "addressCountry": "AT"
               },
               "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": "48.2082",
-                "longitude": "16.3738"
+                "latitude": "48.2379",
+                "longitude": "16.4449"
               },
               "url": "https://rustmontage.at",
               "sameAs": [],
@@ -94,8 +99,8 @@ export default function RootLayout({
                 "@type": "GeoCircle",
                 "geoMidpoint": {
                   "@type": "GeoCoordinates",
-                  "latitude": "48.2082",
-                  "longitude": "16.3738"
+                  "latitude": "48.2379",
+                  "longitude": "16.4449"
                 },
                 "geoRadius": "50000"
               },
@@ -133,7 +138,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-white font-inter pt-16">
+      <body className="bg-wood font-inter pt-16 cursor-none">
+        <LuxuryCursor rootSelector="main" />
+        <ChatIntegration />
+        <CookieBanner />
         <main>{children}</main>
       </body>
     </html>

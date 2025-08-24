@@ -10,7 +10,6 @@ export default function LuxuryCursor({ rootSelector }: Props) {
   const ringRef = useRef<HTMLDivElement | null>(null)
   const dotRef = useRef<HTMLDivElement | null>(null)
   const overlayRef = useRef<HTMLDivElement | null>(null)
-  const tapeRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const root = rootSelector ? document.querySelector(rootSelector) as HTMLElement | null : document.body
@@ -19,7 +18,6 @@ export default function LuxuryCursor({ rootSelector }: Props) {
     const overlay = overlayRef.current!
     const ring = ringRef.current!
     const dot = dotRef.current!
-    const tape = tapeRef.current!
 
     let pointerX = 0
     let pointerY = 0
@@ -28,22 +26,8 @@ export default function LuxuryCursor({ rootSelector }: Props) {
     let ringScale = 1
     let dotScale = 1
     let lastSparkle = 0
-    let prevX = 0
-    let prevY = 0
-    let tapeLenTarget = 60
-    let tapeLenRendered = 60
-    let tapeAngleDeg = 0
-    const PX_TO_MM = 25.4 / 96
     let totalDistancePx = 0
-    let markerAccumPx = 0
-    const markerEveryPx = 120
-    const tapeLabel = document.createElement('span')
-    tapeLabel.className = 'lux-tape-label'
-    tape.appendChild(tapeLabel)
-    const tapeStart = document.createElement('span')
-    tapeStart.className = 'lux-tape-start'
-    tapeStart.textContent = '0 mm'
-    tape.appendChild(tapeStart)
+    const PX_TO_MM = 25.4 / 96
     let rafId = 0
 
     const hoverables = 'a, button, .btn-primary, .btn-secondary, .btn-small, .card, [data-cursor="hover"]'
@@ -53,24 +37,8 @@ export default function LuxuryCursor({ rootSelector }: Props) {
       pointerY = e.clientY
       dot.style.transform = `translate(${pointerX}px, ${pointerY}px) scale(${dotScale})`
 
-      const dx = pointerX - prevX
-      const dy = pointerY - prevY
-      const stepDist = Math.hypot(dx, dy)
-      totalDistancePx += stepDist
-      markerAccumPx += stepDist
-      const speed = stepDist
-      tapeAngleDeg = Math.atan2(dy, dx) * (180 / Math.PI)
-      tapeLenTarget = Math.min(180, Math.max(50, 50 + speed * 1.4))
-      prevX = pointerX
-      prevY = pointerY
-
-      if (markerAccumPx >= markerEveryPx) {
-        markerAccumPx = 0
-        spawnMeasure(pointerX, pointerY, totalDistancePx * PX_TO_MM)
-      }
-
       const now = performance.now()
-      if (now - lastSparkle > 55) {
+      if (now - lastSparkle > 100) {
         lastSparkle = now
         spawnSparkle(pointerX, pointerY)
       }
@@ -121,44 +89,14 @@ export default function LuxuryCursor({ rootSelector }: Props) {
       return el
     }
 
-    const highlightTextUnderTape = () => {
-      const tapeRect = {
-        left: ringX - tapeLenRendered / 2,
-        right: ringX + tapeLenRendered / 2,
-        top: ringY - 9,
-        bottom: ringY + 9
-      }
 
-      const textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div, a')
-      textElements.forEach((el) => {
-        const rect = (el as HTMLElement).getBoundingClientRect()
-        const isOverlapping = !(
-          tapeRect.right < rect.left ||
-          tapeRect.left > rect.right ||
-          tapeRect.bottom < rect.top ||
-          tapeRect.top > rect.bottom
-        )
-
-        if (isOverlapping) {
-          ;(el as HTMLElement).classList.add('lux-text-highlight')
-        } else {
-          ;(el as HTMLElement).classList.remove('lux-text-highlight')
-        }
-      })
-    }
 
     const animate = () => {
       ringX += (pointerX - ringX) * 0.15
       ringY += (pointerY - ringY) * 0.15
       ring.style.transform = `translate(${ringX}px, ${ringY}px) scale(${ringScale})`
-      tapeLenRendered += (tapeLenTarget - tapeLenRendered) * 0.2
-      tape.style.width = `${tapeLenRendered}px`
-      tape.style.transform = `translate(${ringX}px, ${ringY}px) rotate(${tapeAngleDeg}deg)`
+
       const totalMm = totalDistancePx * PX_TO_MM
-      tapeLabel.textContent = `${Math.round(totalMm)} mm`
-
-      highlightTextUnderTape()
-
       if (totalMm >= nextMilestoneMm && !bannerEl) {
         let pick = Math.floor(Math.random() * bannerMessages.length)
         if (pick === lastBannerIdx) pick = (pick + 1) % bannerMessages.length
@@ -205,21 +143,7 @@ export default function LuxuryCursor({ rootSelector }: Props) {
       })
     }
 
-    const spawnMeasure = (x: number, y: number, mmValue: number) => {
-      const wrap = document.createElement('div')
-      wrap.className = 'lux-measure'
-      wrap.style.left = `${x}px`
-      wrap.style.top = `${y}px`
-      const dot = document.createElement('span')
-      dot.className = 'dot'
-      const label = document.createElement('span')
-      label.className = 'label'
-      label.textContent = `${Math.round(mmValue)} mm`
-      wrap.appendChild(dot)
-      wrap.appendChild(label)
-      overlay.appendChild(wrap)
-      wrap.addEventListener('animationend', () => wrap.remove())
-    }
+
 
     root.addEventListener('mousemove', onMove)
     root.addEventListener('mousedown', onDown)
@@ -252,7 +176,6 @@ export default function LuxuryCursor({ rootSelector }: Props) {
 
   return (
     <div ref={overlayRef} className="fixed inset-0 z-[60] pointer-events-none select-none">
-      <div ref={tapeRef} className="lux-tape" />
       <div ref={ringRef} className="lux-cursor-ring" />
       <div ref={dotRef} className="lux-cursor-dot" />
       <style jsx global>{`
@@ -268,47 +191,7 @@ export default function LuxuryCursor({ rootSelector }: Props) {
           will-change: transform;
           z-index: 60;
         }
-        .lux-tape {
-          position: fixed;
-          left: 0;
-          top: 0;
-          height: 18px;
-          width: 60px;
-          border-radius: 9999px;
-          transform: translate(-50%, -50%);
-          transform-origin: 0% 50%;
-          background-color: #f2d34a;
-          background-image:
-            repeating-linear-gradient(90deg, rgba(0,0,0,0.55) 0 2px, transparent 2px 10px),
-            repeating-linear-gradient(90deg, rgba(0,0,0,0.85) 0 3px, transparent 3px 50px);
-          box-shadow: 0 4px 18px rgba(0,0,0,0.25), inset 0 -1px 0 rgba(0,0,0,0.2);
-          border: 1px solid rgba(0,0,0,0.18);
-          z-index: 1;
-          opacity: 0.7;
-          pointer-events: none;
-        }
-        .lux-tape-label {
-          position: absolute;
-          right: 10px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 12px;
-          font-weight: 700;
-          color: rgba(0,0,0,0.8);
-          text-shadow: 0 1px 0 rgba(255,255,255,0.45);
-          letter-spacing: 0.02em;
-        }
-        .lux-tape-start {
-          position: absolute;
-          left: 10px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 12px;
-          font-weight: 700;
-          color: rgba(0,0,0,0.6);
-          text-shadow: 0 1px 0 rgba(255,255,255,0.45);
-          letter-spacing: 0.02em;
-        }
+
         .lux-cursor-ring {
           position: fixed;
           width: 36px;
@@ -343,38 +226,7 @@ export default function LuxuryCursor({ rootSelector }: Props) {
           0% { opacity: 0.9; transform: translate(-50%, -50%) scale(0.8); }
           100% { opacity: 0; transform: translate(-50%, -50%) scale(2.2); }
         }
-        .lux-measure {
-          position: fixed;
-          transform: translate(-50%, -50%);
-          pointer-events: none;
-          z-index: 57;
-          animation: lux-measure-life 1s ease forwards;
-        }
-        .lux-measure .dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 9999px;
-          background: #f2d34a;
-          border: 1px solid rgba(0,0,0,0.2);
-          box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-          display: inline-block;
-        }
-        .lux-measure .label {
-          margin-left: 8px;
-          padding: 2px 6px;
-          font-size: 12px;
-          border-radius: 9999px;
-          background: rgba(255,255,255,0.9);
-          border: 1px solid rgba(0,0,0,0.1);
-          color: #1a1a1a;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-        @keyframes lux-measure-life {
-          0% { opacity: 0; transform: translate(-50%, -50%) translateY(-6px); }
-          5% { opacity: 1; transform: translate(-50%, -50%) translateY(0px); }
-          90% { opacity: 1; }
-          100% { opacity: 0; }
-        }
+
         .lux-banner {
           position: fixed;
           left: 0;
@@ -399,15 +251,7 @@ export default function LuxuryCursor({ rootSelector }: Props) {
           0% { opacity: 0; transform: translate(-50%, -50%) translateY(6px); }
           100% { opacity: 1; transform: translate(-50%, -50%) translateY(0px); }
         }
-        .lux-text-highlight {
-          background: linear-gradient(135deg, rgba(242, 211, 74, 0.3) 0%, rgba(242, 211, 74, 0.15) 100%);
-          text-shadow: 0 0 8px rgba(242, 211, 74, 0.4);
-          transform: scale(1.02);
-          transition: all 200ms ease;
-          border-radius: 4px;
-          padding: 2px 4px;
-          margin: -2px -4px;
-        }
+
       `}</style>
     </div>
   )
